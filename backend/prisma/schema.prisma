@@ -1,0 +1,60 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id             Int              @id @default(autoincrement())
+  name           String
+  email          String           @unique
+  password       String
+  role           Role             @default(USER)
+  ownedTaskLists TaskList[]       @relation("TaskListOwner") // Списки, створені цим юзером
+  taskListMember TaskListMember[] // Участь у списках завдань
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+}
+
+model TaskList {
+  id             Int              @id @default(autoincrement())
+  name           String
+  description    String?
+  ownerId        Int
+  owner          User             @relation("TaskListOwner", fields: [ownerId], references: [id]) // Власник списку
+  tasks          Task[]
+  members        TaskListMember[]
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+}
+
+model Task {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String?
+  completed   Boolean  @default(false)
+  taskListId  Int
+  taskList    TaskList @relation(fields: [taskListId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model TaskListMember {
+  id         Int       @id @default(autoincrement())
+  userId     Int
+  taskListId Int
+  role       Role      @default(USER)
+
+  user     User        @relation(fields: [userId], references: [id])
+  taskList TaskList    @relation(fields: [taskListId], references: [id])
+
+  @@unique([userId, taskListId])
+}
+
+enum Role {
+  ADMIN
+  USER
+}
