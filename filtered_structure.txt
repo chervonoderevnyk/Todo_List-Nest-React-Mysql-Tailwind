@@ -1,183 +1,83 @@
-Folder PATH listing
-Volume serial number is 00000248 62BA:7947
-\---src
-    |   .DS_Store
-    |   app.module.ts
-    |   main.ts
-    |   
-    +---auth
-    |       auth.controller.ts
-    |       auth.module.ts
-    |       auth.service.ts
-    |       jwt.strategy.ts
-    |       
-    +---common
-    |   |   .DS_Store
-    |   |   
-    |   +---decorators
-    |   |       roles.decorator.ts
-    |   |       
-    |   +---enums
-    |   |       user.role.enum.ts
-    |   |       
-    |   +---filters
-    |   |       http-exception.filter.ts
-    |   |       
-    |   \---guards
-    |           auth.guard.ts
-    |           permissions.role.user.guard.ts
-    |           roles.guard.ts
-    |           task-list-member.guard.ts
-    |           user.payload.ts
-    |           
-    +---prisma
-    |       prisma.module.ts
-    |       prisma.service.ts
-    |       
-    +---task-lists
-    |   |   task-lists.controller.ts
-    |   |   task-lists.module.ts
-    |   |   task-lists.service.ts
-    |   |   
-    |   \---dto
-    |           add.member.dto.ts
-    |           create-task-list.dto.ts
-    |           
-    +---tasks
-    |   |   task.controller.ts
-    |   |   task.module.ts
-    |   |   task.service.ts
-    |   |   
-    |   \---dto
-    |           create-task.dto.ts
-    |           update-task.dto.ts
-    |           
-    \---users
-        |   user.controller.ts
-        |   user.module.ts
-        |   user.service.ts
-        |   
-        \---dto
-                create.user.dto.ts
-                update.user.dto.ts
-                
-Folder PATH listing
-Volume serial number is 000001EE 62BA:7947
-No subfolders exist 
-Folder PATH listing
-Volume serial number is 000002A4 62BA:7947
-    launch.json
-    
-No subfolders exist 
-Folder PATH listing
-Volume serial number is 000001DE 62BA:7947
-\---migrations
-    |   migration_lock.toml
-    |   
-    \---20250303105413_init
-            migration.sql
-            
-Folder PATH listing
-Volume serial number is 00000256 62BA:7947
-\---users
-    |   user.controller.ts
-    |   user.module.ts
-    |   user.service.ts
-    |   
-    \---dto
-            create.user.dto.ts
-            update.user.dto.ts
-            
-Folder PATH listing
-Volume serial number is 0000020E 62BA:7947
-\---20250303105413_init
-        migration.sql
-        
-Folder PATH listing
-Volume serial number is 000001FE 62BA:7947
-    migration.sql
-    
-No subfolders exist 
-Folder PATH listing
-Volume serial number is 00000233 62BA:7947
-    auth.controller.ts
-    auth.module.ts
-    auth.service.ts
-    jwt.strategy.ts
-    
-No subfolders exist 
-Folder PATH listing
-Volume serial number is 000001CE 62BA:7947
-\---guards
-        auth.guard.ts
-        permissions.role.user.guard.ts
-        roles.guard.ts
-        task-list-member.guard.ts
-        user.payload.ts
-        
-Folder PATH listing
-Volume serial number is 00000171 62BA:7947
-    prisma.module.ts
-    prisma.service.ts
-    
-No subfolders exist 
-Folder PATH listing
-Volume serial number is 00000233 62BA:7947
-\---dto
-        add.member.dto.ts
-        create-task-list.dto.ts
-        
-Folder PATH listing
-Volume serial number is 00000189 62BA:7947
-\---dto
-        create-task.dto.ts
-        update-task.dto.ts
-        
-Folder PATH listing
-Volume serial number is 000001FD 62BA:7947
-\---dto
-        create.user.dto.ts
-        update.user.dto.ts
-        
-Folder PATH listing
-Volume serial number is 000001A5 62BA:7947
-    roles.decorator.ts
-    
-No subfolders exist 
-Folder PATH listing
-Volume serial number is 62BA-7947
-    user.role.enum.ts
-    
-No subfolders exist 
-Folder PATH listing
-Volume serial number is 0000029A 62BA:7947
-    http-exception.filter.ts
-    
-No subfolders exist 
-Folder PATH listing
-Volume serial number is 0000021A 62BA:7947
-    auth.guard.ts
-    permissions.role.user.guard.ts
-    roles.guard.ts
-    task-list-member.guard.ts
-    user.payload.ts
-    
-No subfolders exist 
-Folder PATH listing
-Volume serial number is 00000213 62BA:7947
-    add.member.dto.ts
-    create-task-list.dto.ts
-    
-No subfolders exist 
-Folder PATH listing
-Volume serial number is 00000150 62BA:7947
-    create-task.dto.ts
-    update-task.dto.ts
-    
-No subfolders exist 
-Folder PATH listing
-Volume serial number is 00000225 62BA:7947
-    create.user.dto.ts
-    update.user.dto.ts
-    
-No subfolders exist 
+.DS_Store
+.gitignore
+query
+README.md
+backend\.env
+backend\eslint.config.mjs
+backend\nodemon.json
+backend\package-lock.json
+backend\package.json
+backend\tsconfig.json
+backend\.vscode\launch.json
+backend\prisma\schema.prisma
+backend\prisma\migrations\migration_lock.toml
+backend\prisma\migrations\20250303105413_init\migration.sql
+backend\public\file.svg
+backend\public\globe.svg
+backend\public\next.svg
+backend\public\vercel.svg
+backend\public\window.svg
+backend\src\.DS_Store
+backend\src\app.module.ts
+backend\src\main.ts
+backend\src\auth\auth.controller.ts
+backend\src\auth\auth.module.ts
+backend\src\auth\auth.service.ts
+backend\src\auth\jwt.strategy.ts
+backend\src\common\.DS_Store
+backend\src\common\decorators\roles.decorator.ts
+backend\src\common\enums\user.role.enum.ts
+backend\src\common\filters\http-exception.filter.ts
+backend\src\common\guards\auth.guard.ts
+backend\src\common\guards\permissions.role.user.guard.ts
+backend\src\common\guards\roles.guard.ts
+backend\src\common\guards\task-list-member.guard.ts
+backend\src\common\guards\user.payload.ts
+backend\src\prisma\prisma.module.ts
+backend\src\prisma\prisma.service.ts
+backend\src\task-lists\task-lists.controller.ts
+backend\src\task-lists\task-lists.module.ts
+backend\src\task-lists\task-lists.service.ts
+backend\src\task-lists\dto\add.member.dto.ts
+backend\src\task-lists\dto\create-task-list.dto.ts
+backend\src\tasks\task.controller.ts
+backend\src\tasks\task.module.ts
+backend\src\tasks\task.service.ts
+backend\src\tasks\dto\create-task.dto.ts
+backend\src\tasks\dto\update-task.dto.ts
+backend\src\users\user.controller.ts
+backend\src\users\user.module.ts
+backend\src\users\user.service.ts
+backend\src\users\dto\create.user.dto.ts
+backend\src\users\dto\update.user.dto.ts
+frontend\.env
+frontend\.gitignore
+frontend\package-lock.json
+frontend\package.json
+frontend\README.md
+frontend\tailwind.config.js
+frontend\tsconfig.json
+frontend\public\favicon.ico
+frontend\public\index.html
+frontend\public\logo192.png
+frontend\public\logo512.png
+frontend\public\manifest.json
+frontend\public\robots.txt
+frontend\src\App.css
+frontend\src\App.test.tsx
+frontend\src\App.tsx
+frontend\src\index.css
+frontend\src\index.tsx
+frontend\src\logo.svg
+frontend\src\react-app-env.d.ts
+frontend\src\reportWebVitals.ts
+frontend\src\setupTests.ts
+frontend\src\components\PrivateRoute.tsx
+frontend\src\components\TaskList.tsx
+frontend\src\context\AuthContext.tsx
+frontend\src\pages\Dashboard.tsx
+frontend\src\pages\SignIn.tsx
+frontend\src\pages\SignUp.tsx
+frontend\src\services\AuthService.ts
+frontend\src\services\taskService.ts
+frontend\src\services\todoListService.ts

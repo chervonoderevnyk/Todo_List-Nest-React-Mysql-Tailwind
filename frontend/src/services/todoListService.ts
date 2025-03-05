@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const API_URL = process.env.REACT_APP_API_URL + "/todo-lists";
-// const API_URL = "http://localhost:3002/todo-lists";
+const API_URL = process.env.REACT_APP_API_URL + "/task-lists";
+// const API_URL = "http://localhost:3002/task-lists";
 
 export const getTodoLists = async (token: string) => {
   const response = await axios.get(API_URL, {
