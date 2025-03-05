@@ -25,16 +25,19 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const login = async (email: string, password: string) => {
     try {
-      const data = await loginUser(email, password);
+      console.log("Виконується функція login...");
+      const data = await loginUser(email, password); // Замість 'data.token' використовуйте 'data.accessToken'
+      console.log("Отримані дані від сервера:", data);
+  
       if (!data.token) throw new Error("Invalid login response");
   
-      setToken(data.token);
-      setRole(data.role);
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("role", data.role);
+      setToken(data.token);  // Оновлено для використання 'accessToken'
+      setRole(data.role);          // Якщо role повертається, збережіть його тут
+      localStorage.setItem("token", data.token);  // Збережіть 'accessToken'
+      localStorage.setItem("role", data.role);  // Якщо role повертається, збережіть його
     } catch (error) {
-      alert("Помилка входу: невірний email або пароль");
-      throw error;
+      console.error("Помилка входу:", error);
+      throw new Error("Помилка входу: невірний email або пароль");
     }
   };
 

@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 import { AuthContext } from "../context/AuthContext";
 
 const signInSchema = z.object({
@@ -23,15 +22,17 @@ export default function SignIn() {
 
   const onSubmit = async (data: SignInFormData) => {
     try {
+      console.log("Перед відправкою даних:", data);
       if (authContext) {
-        await authContext.login(data.email, data.password); // Викликаємо login з контексту
-        navigate("/"); // Редирект на головну сторінку (Dashboard)
+        await authContext.login(data.email, data.password);
+        console.log("Авторизація успішна!");
+        navigate("/");
       }
     } catch (error) {
+      console.error("Помилка входу:", error);
       alert("Помилка входу");
     }
   };
-  
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">

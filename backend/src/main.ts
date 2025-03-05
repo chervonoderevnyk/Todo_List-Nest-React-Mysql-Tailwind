@@ -33,8 +33,10 @@ async function bootstrap() {
   // console.log("JWT_SECRET:", process.env.JWT_SECRET);
 
   app.enableCors({
-    origin: 'http://localhost:3000', // Дозволити фронту доступ до API
-    credentials: true, // Якщо є авторизація через cookies
+    origin: "http://localhost:3000",
+    credentials: true,
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
+    allowedHeaders: "Content-Type, Authorization",
   });
 
   await app.listen(3002);
