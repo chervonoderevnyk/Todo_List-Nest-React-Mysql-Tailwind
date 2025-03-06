@@ -17,22 +17,22 @@ export class TaskListService {
               select: { id: true }
             }
           }
+        },
+        tasks: {  // Додаємо завдання для підрахунку
+          select: { id: true }
         }
       }
     });
   
-    const totalTaskLists = taskLists.length;
-    const taskListsWithMembers = taskLists.filter(tl => tl.members.length > 0).length;
-    const taskListsWithoutMembers = totalTaskLists - taskListsWithMembers;
-  
     return {
-      totalTaskLists, // Загальна кількість списків
-      taskListsWithMembers, // Кількість списків з учасниками
-      taskListsWithoutMembers, // Кількість списків без учасників
+      totalTaskLists: taskLists.length, // Загальна кількість списків
+      taskListsWithMembers: taskLists.filter(tl => tl.members.length > 0).length,
+      taskListsWithoutMembers: taskLists.filter(tl => tl.members.length === 0).length,
       taskLists: taskLists.map(taskList => ({
         ...taskList,
-        membersCount: taskList.members.length, // Кількість учасників у конкретному списку
-        members: taskList.members.map(member => member.user) // Масив учасників { id }
+        membersCount: taskList.members.length, // Кількість учасників у списку
+        members: taskList.members.map(member => member.user), // Масив учасників { id }
+        tasksCount: taskList.tasks.length // Додаємо кількість завдань
       }))
     };
   }  

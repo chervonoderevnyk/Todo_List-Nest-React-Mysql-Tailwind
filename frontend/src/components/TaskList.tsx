@@ -1,108 +1,58 @@
-import { useEffect, useState, useContext } from "react";
-import { AuthContext } from "../context/AuthContext";
-import { getTasks, createTask, updateTask, deleteTask } from "../services/taskService";
+import React, { useEffect, useState } from 'react';
+import { getTasks, deleteTask } from '../services/taskService';
 
-interface Task {
-  id: number;
-  title: string;
-  description: string;
-  completed: boolean;
-}
-
-export default function TaskList({ listId }: { listId: number }) {
-  const authContext = useContext(AuthContext);
-  const [tasks, setTasks] = useState<Task[]>([]);
-  const [newTask, setNewTask] = useState({ title: "", description: "" });
+const TaskList = () => {
+  const [tasks, setTasks] = useState<any[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (authContext?.token) {
-      getTasks(authContext.token, listId).then(setTasks).catch(console.error);
-    }
-  }, [authContext?.token, listId]);
+    const fetchTasks = async () => {
+      try {
+        const taskData = await getTasks();
+        setTasks(taskData);
+        setLoading(false);
+      } catch (err) {
+        setError('Не вдалося завантажити завдання');
+        setLoading(false);
+      }
+    };
+    
+    fetchTasks();
+  }, []);
 
-  const handleCreateTask = async () => {
-    if (!newTask.title.trim()) return;
+  const handleDelete = async (id: number) => {
     try {
-      const task = await createTask(authContext!.token!, listId, newTask.title, newTask.description);
-      setTasks([...tasks, task]);
-      setNewTask({ title: "", description: "" });
-    } catch (error) {
-      console.error("Помилка створення завдання", error);
+      await deleteTask(id);
+      setTasks(tasks.filter(task => task.id !== id)); // Оновлюємо список після видалення
+      alert('Завдання успішно видалено');
+    } catch (err) {
+      alert('Не вдалося видалити завдання');
     }
   };
 
-  const handleUpdateTask = async (id: number, updates: Partial<Task>) => {
-    try {
-      await updateTask(authContext!.token!, id, updates);
-      setTasks(tasks.map(task => (task.id === id ? { ...task, ...updates } : task)));
-    } catch (error) {
-      console.error("Помилка оновлення завдання", error);
-    }
-  };
-
-  const handleDeleteTask = async (id: number) => {
-    try {
-      await deleteTask(authContext!.token!, id);
-      setTasks(tasks.filter(task => task.id !== id));
-    } catch (error) {
-      console.error("Помилка видалення завдання", error);
-    }
-  };
+  if (loading) return <div>Завантаження...</div>;
+  if (error) return <div>{error}</div>;
 
   return (
-    <div className="bg-gray-200 p-4 rounded shadow mt-4">
-      <h2 className="text-xl font-semibold mb-2">Завдання</h2>
-
-      <div className="flex mb-4">
-        <input
-          type="text"
-          placeholder="Назва завдання"
-          value={newTask.title}
-          onChange={(e) => setNewTask({ ...newTask, title: e.target.value })}
-          className="border p-2 rounded mr-2 w-1/3"
-        />
-        <input
-          type="text"
-          placeholder="Опис"
-          value={newTask.description}
-          onChange={(e) => setNewTask({ ...newTask, description: e.target.value })}
-          className="border p-2 rounded mr-2 w-1/3"
-        />
-        <button onClick={handleCreateTask} className="bg-blue-500 text-white px-4 py-2 rounded">
-          Додати
-        </button>
-      </div>
-
-      <ul>
-        {tasks.map((task) => (
-          <li key={task.id} className="bg-white p-4 mb-2 rounded shadow flex justify-between items-center">
-            <input
-              type="checkbox"
-              checked={task.completed}
-              onChange={() => handleUpdateTask(task.id, { completed: !task.completed })}
-              className="mr-2"
-            />
-            <input
-              type="text"
-              value={task.title}
-              onChange={(e) => handleUpdateTask(task.id, { title: e.target.value })}
-              className="border p-2 rounded w-1/3"
-            />
-            <input
-              type="text"
-              value={task.description}
-              onChange={(e) => handleUpdateTask(task.id, { description: e.target.value })}
-              className="border p-2 rounded w-1/3"
-            />
-            <button
-              onClick={() => handleDeleteTask(task.id)}
-              className="bg-red-500 text-white px-4 py-2 rounded"
+    <div>
+      <h2 className="text-2xl font-semibold">Список Завдань</h2>
+      <div className="space-y-4">
+        {tasks.map(task => (
+          <div key={task.id} className="bg-gray-100 p-4 rounded-md">
+            <h3 className="text-xl font-semibold">{task.title}</h3>
+            <p>{task.description}</p>
+            <button 
+              onClick={() => handleDelete(task.id)} 
+              className="bg-red-500 text-white py-2 px-4 rounded-md mt-2"
             >
               Видалити
             </button>
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
-}
+};
+
+export default TaskList;

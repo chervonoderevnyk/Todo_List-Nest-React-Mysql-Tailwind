@@ -7,10 +7,8 @@ import { CreateTaskListDto } from './dto/create-task-list.dto';
 import { AuthGuard } from '../common/guards/auth.guard';
 import type { Request as ExpressRequest } from 'express';
 import { UserPayload } from '../common/guards/user.payload';
-// import { TaskListMemberGuard } from '../common/guards/task-list-member.guard';
 import { AddMemberDto } from './dto/add.member.dto';
 import { RolesGuard } from '../common/guards/roles.guard';
-// import { UserRoleEnum } from '../common/enums/user.role.enum';
 
 @ApiTags('task-lists')
 @Controller('task-lists')
@@ -64,8 +62,8 @@ export class TaskListController {
   }
 
   @Post(':id/members')
-  @UseGuards(AuthGuard, RolesGuard) // Додаємо перевірку ролей
-  @Role('ADMIN')
+  // @UseGuards(AuthGuard, RolesGuard)
+  // @Role('ADMIN')
 @ApiOperation({ summary: 'Додати співучасника за email' })
 async addMember(
   @Param('id') id: string,
