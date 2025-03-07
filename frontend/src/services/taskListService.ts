@@ -34,3 +34,22 @@ export const addMemberToTaskList = async (taskListId: number, email: string) => 
     throw error;
   }
 };
+
+export const createTaskList = async (taskListData: {name: string, description: string}) => {
+  try {
+    const response = await axios.post(API_URL, taskListData);
+    return response.data;
+  } catch (error) {
+    console.error('Error creating taskList:', error);
+    throw error;
+  }
+};
+
+export const fetchTaskListById = async (id: string) => {
+  const response = await axios.get(`${API_URL}/${id}`);
+  return response.data;
+};
+
+export const deleteTaskList = async (id: string) => {
+  await axios.delete(`${API_URL}/${id}`);
+};

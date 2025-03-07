@@ -25,8 +25,8 @@ export class TaskController {
   }
 
   @Post()
-  @UseGuards(AuthGuard, RolesGuard)
-  @Role('ADMIN')
+  // @UseGuards(AuthGuard, RolesGuard)
+  // @Role('ADMIN')
   create(@Body() createTaskDto: CreateTaskDto) {
     return this.taskService.create(createTaskDto);
   }

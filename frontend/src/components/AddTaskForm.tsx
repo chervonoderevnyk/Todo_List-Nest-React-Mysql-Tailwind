@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import { createTask } from '../services/taskService';
 
-const AddTaskForm = ({ taskListId, onClose }: { taskListId: number, onClose: () => void }) => {
+const AddTaskForm = ({ taskListId, onClose, onTaskAdded }: { 
+  taskListId: number, 
+  onClose: () => void,
+  onTaskAdded: () => void
+}) => {
   const [title, setTitle] = useState<string>('');
   const [description, setDescription] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
@@ -16,18 +20,13 @@ const AddTaskForm = ({ taskListId, onClose }: { taskListId: number, onClose: () 
       setTitle('');
       setDescription('');
       alert('Завдання успішно додано');
+      onTaskAdded(); // Оновлюємо кількість завдань у TaskLists
       onClose(); // Закриваємо форму після успішного додавання завдання
     } catch (err) {
       setError('Не вдалося додати завдання');
     }
 
     setLoading(false);
-  };
-
-  const handleCancel = () => {
-    setTitle('');
-    setDescription('');
-    onClose(); // Закриваємо форму без збереження завдання
   };
 
   return (
@@ -58,7 +57,7 @@ const AddTaskForm = ({ taskListId, onClose }: { taskListId: number, onClose: () 
 
         <button
           type="button"
-          onClick={handleCancel}
+          onClick={onClose}
           className="bg-red-500 text-white py-2 px-4 rounded-md"
         >
           Скасувати

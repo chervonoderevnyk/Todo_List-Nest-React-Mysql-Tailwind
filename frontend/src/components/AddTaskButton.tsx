@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import AddTaskForm from './AddTaskForm';
 
-const AddTaskButton = ({ taskListId }: { taskListId: number }) => {
+const AddTaskButton = ({ taskListId, onTaskAdded }: { taskListId: number, onTaskAdded: () => void }) => {
   const [isFormVisible, setIsFormVisible] = useState<boolean>(false);
 
   // Обробник для відкриття форми
@@ -27,7 +27,7 @@ const AddTaskButton = ({ taskListId }: { taskListId: number }) => {
 
       {isFormVisible && (
         <div className="mt-4">
-          <AddTaskForm taskListId={taskListId} onClose={handleCloseForm} />
+          <AddTaskForm taskListId={taskListId} onClose={handleCloseForm} onTaskAdded={onTaskAdded} />
         </div>
       )}
     </div>

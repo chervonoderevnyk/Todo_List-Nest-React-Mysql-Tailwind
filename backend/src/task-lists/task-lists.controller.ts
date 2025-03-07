@@ -35,8 +35,8 @@ export class TaskListController {
   
 
   @Post()
-  @Role('ADMIN')
-  @UseGuards(AuthGuard, RolesGuard)
+  // @Role('ADMIN')
+  // @UseGuards(AuthGuard, RolesGuard)
   @ApiOperation({ summary: 'Створити новий список завдань' })
   async create(
     @Body() createTaskListDto: CreateTaskListDto,
@@ -51,8 +51,8 @@ export class TaskListController {
   
 
   @Delete(':id')
-  @Role('ADMIN')
-  @UseGuards(AuthGuard, RolesGuard)
+  // @Role('ADMIN')
+  // @UseGuards(AuthGuard, RolesGuard)
   @ApiOperation({ summary: 'Видалити список завдань за ID' })
   @ApiResponse({ status: 200, description: 'Список завдань видалено.' })
   @ApiResponse({ status: 404, description: 'Список завдань не знайдено.' })
